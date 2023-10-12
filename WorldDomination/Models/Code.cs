@@ -1,18 +1,21 @@
-﻿using WorldDomination.Helpers;
+﻿using System.ComponentModel.DataAnnotations;
+using WorldDomination.Helpers;
 
 namespace WorldDomination.Models
 {
     public class Code
     {
-        private readonly string _code;
+        [Key]
+        public int Id { get; set; }
+        public string code { get; set; }
         //public Country AssignedCountry { get; set; } = new Country();
         public Code(string code)
         {
-            _code = code;
+            this.code = code;
         }
         public Code()
         {
-            _code = CodeGenerator.GetCode();
+            code = CodeGenerator.GetCode();
         }
 
         /*public bool AssignCountry(Country country)
@@ -27,7 +30,7 @@ namespace WorldDomination.Models
 
         public override string ToString()
         {
-            return _code;
+            return code;
         }
     }
 }

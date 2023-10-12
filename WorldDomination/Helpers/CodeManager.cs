@@ -11,10 +11,8 @@
     public class CodeManager
     {
         private readonly AppDbContext _dbContext;
-        private CodeStorage _codeList;
         public CodeManager(AppDbContext dbContext)
         {
-            _codeList = new CodeStorage();
             _dbContext = dbContext;
         }
 

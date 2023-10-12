@@ -12,7 +12,7 @@ namespace WorldDomination.Databases
         public DbSet<Code> Codes { get; set; }
 
         public List<string> CodesString => Codes.ToList()
-                                                .Cast<string>()
+                                                .Select(code => code.ToString())
                                                 .ToList();
     }
 }
