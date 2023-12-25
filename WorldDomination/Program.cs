@@ -1,7 +1,38 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using WorldDomination.Databases;
+using WorldDomination.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+//at first start, remember to dotnet user-secrets set "JwtSettings:SecretKey" "*your key*"
+//same for "Admin:Password"
+
+
+//Configuring JWT
+
+var jwtIssuer = builder.Configuration.GetSection("JwtSettings:Issuer").Get<string>();
+var jwtKey = builder.Configuration["JwtSettings:SecretKey"];
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+ .AddJwtBearer(options =>
+ {
+     options.TokenValidationParameters = new TokenValidationParameters
+     {
+         ValidateIssuer = true,
+         ValidateAudience = true,
+         ValidateLifetime = true,
+         ValidateIssuerSigningKey = true,
+         ValidIssuer = jwtIssuer,
+         ValidAudience = jwtIssuer,
+         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
+     };
+ });
+
+// Load administrator password
+
+builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
 
 // Add services to the container.
 
@@ -35,8 +66,9 @@ if (app.Environment.IsDevelopment())
 
 //app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
-app.Urls.Add("http://26.145.106.179:7281");
+//app.Urls.Add("http://26.145.106.179:7281");
 app.UseCors("default"); 
 
 app.MapControllers();
