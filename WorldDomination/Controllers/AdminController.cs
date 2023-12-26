@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
@@ -44,6 +45,13 @@ namespace WorldDomination.Controllers
                 return Ok(token);
             }
             else return BadRequest("Wrong password, gtfo!");
+        }
+
+        [HttpGet]
+        [Authorize]
+        public IActionResult TestAuth()
+        {
+            return Ok("перемога");
         }
     }
 }
