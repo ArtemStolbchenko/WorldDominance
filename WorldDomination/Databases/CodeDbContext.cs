@@ -5,9 +5,13 @@ namespace WorldDomination.Databases
 {
     public class CodeDbContext : DbContext
     {
-        public CodeDbContext(DbContextOptions<DbContext> options) : base(options) { }
+        public CodeDbContext(DbContextOptions<CodeDbContext> options) : base(options) { }
 
-        public DbSet<Code> codes { get; set; }
+        public DbSet<Code> Codes { get; set; }
+
+        public List<string> CodesString => Codes.ToList()
+                                                .Select(code => code.ToString())
+                                                .ToList();
 
     }
 }

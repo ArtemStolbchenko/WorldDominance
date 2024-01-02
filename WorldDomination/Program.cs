@@ -39,8 +39,10 @@ builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(); 
-builder.Services.AddDbContext<AppDbContext>(options =>
+builder.Services.AddSwaggerGen();
+//builder.Services.AddDbContext<AppDbContext>(options =>
+//    options.UseInMemoryDatabase("InMemoryDb"));
+builder.Services.AddDbContext<CodeDbContext>(options =>
     options.UseInMemoryDatabase("InMemoryDb"));
 builder.Services.AddCors(options =>
 {

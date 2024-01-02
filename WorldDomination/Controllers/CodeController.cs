@@ -12,13 +12,13 @@ namespace WorldDomination.Controllers
     public class CodeController : ControllerBase
     {
         private readonly CodeManager _manager;
-        private readonly AppDbContext _appDbContext;
+        private readonly CodeDbContext _codeDbContext;
         private readonly ILogger<CodeController> _logger;
 
-        public CodeController(ILogger<CodeController> logger, AppDbContext dbContext)
+        public CodeController(ILogger<CodeController> logger, CodeDbContext dbContext)
         {
             _logger = logger;
-            _appDbContext = dbContext;
+            _codeDbContext = dbContext;
             _manager = new CodeManager(dbContext);
         }
 
@@ -46,7 +46,7 @@ namespace WorldDomination.Controllers
         [Route("/GetAll")]
         public ActionResult<List<string>> GetAll()
         {
-            return Ok(_appDbContext.CodesString);
+            return Ok(_codeDbContext.CodesString);
         }
     }
 }

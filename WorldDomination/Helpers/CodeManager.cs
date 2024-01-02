@@ -10,8 +10,8 @@
     using WorldDomination.Models;
     public class CodeManager
     {
-        private readonly AppDbContext _dbContext;
-        public CodeManager(AppDbContext dbContext)
+        private readonly CodeDbContext _dbContext;
+        public CodeManager(CodeDbContext dbContext)
         {
             _dbContext = dbContext;
         }

@@ -13,13 +13,13 @@ namespace WorldDomination.Controllers
     [Route("[controller]")]
     public class AdminController : ControllerBase
     {
-        private readonly AppDbContext _appDbContext;
+        private readonly CodeDbContext _codeDbContext;
         private readonly ILogger<CodeController> _logger;
         private readonly IConfiguration _config;
-        public AdminController(ILogger<CodeController> logger, AppDbContext dbContext, IConfiguration config)
+        public AdminController(ILogger<CodeController> logger, CodeDbContext dbContext, IConfiguration config)
         {
             _logger = logger;
-            _appDbContext = dbContext;
+            _codeDbContext = dbContext;
             _config = config;
         }
         [HttpPost]
